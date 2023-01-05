@@ -41,3 +41,19 @@ exports.findById = (req, res) => {
         })
     })
 }
+
+exports.update = (req, res) => {
+    customer.findByIdAndUpdate(req.params.customerId, {$set: req.body}, {new: true})
+    .then(data => {
+        if(!data){
+            return res.status(404).json({
+                msg: "ไม่พบ record รหัส : " + req.params.customerId
+            })
+        }
+        res.json(data)
+    }).catch(err => {
+        return res.status(500).json({
+            msg: "ไม่สามารถ update ข้อมูลได้เนื่องจาก : " + err.message
+        })
+    })
+}
