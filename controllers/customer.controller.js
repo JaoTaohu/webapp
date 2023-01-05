@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     c.save().then(data => {
         res.json(data)
     }).catch(err => {
-        return res.status(500).jso({
+        return res.status(500).json({
             msg: "ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก : " + err.message
         })
     })
