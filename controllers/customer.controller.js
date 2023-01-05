@@ -27,3 +27,17 @@ exports.findAll = (req, res) => {
     })
 }
 
+exports.findById = (req, res) => {
+    customer.findById(req.params.customerId).then(data=>{
+        if(!data){
+            return res.status(404).json({
+                msg: "ไม่พบ record รหัส : " + req.params.customerId
+            })
+        }
+        res.json(data)
+    }).catch(err => {
+        return res.status(500).json({
+            msg: "เกิดข้อผิดพลาดเนื่องจาก : " + err.message
+        })
+    })
+}
