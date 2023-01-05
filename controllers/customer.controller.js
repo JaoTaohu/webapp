@@ -4,6 +4,19 @@ exports.index = (req, res) => {
     res.send('<h1>Customer Application</h1><hr><a href="/api/customer">ikp=njv]^d8hk</a>')
 }
 
+exports.create = (req, res) => {
+    const c = new customer(req.body)
+
+    c.save().then(data => {
+        res.json(data)
+    }).catch(err => {
+        return res.status(500).jso({
+            msg: "ไม่สามารถเพิ่มข้อมูลได้เนื่องจาก : " + err.message
+        })
+    })
+}
+
+
 exports.findAll = (req, res) => {
     customer.find().then(data => {
         res.json(data)
@@ -13,3 +26,4 @@ exports.findAll = (req, res) => {
         })
     })
 }
+
